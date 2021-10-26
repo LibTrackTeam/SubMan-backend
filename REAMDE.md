@@ -8,14 +8,13 @@ returns "Hello Subman!"
 
 # Usage
 
-## Dev Deploy
+## Set This Up
+1. clone this repo
+2. run `composer install`
+3. to serve
+    - With php in-built server `php -S localhost:8080 -t public public/index.php`
 
-### PHP Server
+### Database Set Up
 
-`composer install`
-
-`php -S localhost:8080 -t public public/index.php`
-
-## Prod Deploy
-
-Undone
+1. set database up in `database.php`
+2. to get $db object anywhere, do $db = this->get("db") to get a PDO object
