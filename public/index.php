@@ -1,10 +1,17 @@
 <?php
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+$container = new \DI\Container();
+
+// setting up database
+$database = require __DIR__ . '/../app/database.php';
+$container->set(PDO::class, $database);
+
+// initializing up with container
+AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 $routes = require __DIR__ . '/../app/routes.php';

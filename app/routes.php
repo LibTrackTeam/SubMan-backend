@@ -11,5 +11,17 @@ return function (App $app){
         $response->getBody()->write("Hello SubMan!");
         return $response;
     });
+    
+    // just to test the db 
+    $app->get('/db', function (Request $request, Response $response, $args) {
+        $db = $this->get(PDO::class);
+        $sth = $db->prepare("SELECT * from user");
+        $sth->execute();
+        $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $payload = json_encode($data);
+        $response->getBody()->write($payload);
+        // $response->getBody()->write("Hello SubMan! $thefoo");
+        return $response->withHeader('Content-Type', 'application/json');
+    });
 
 };
