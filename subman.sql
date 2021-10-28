@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2021 at 03:16 PM
+-- Generation Time: Oct 28, 2021 at 11:21 PM
 -- Server version: 8.0.26
 -- PHP Version: 7.4.7
 
@@ -72,7 +72,7 @@ CREATE TABLE `subscriptions` (
 CREATE TABLE `users` (
   `id` int NOT NULL,
   `uid` varchar(191) COLLATE utf8mb4_general_ci NOT NULL,
-  `currency` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `currency` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `message_token` longtext COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
