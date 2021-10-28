@@ -15,7 +15,7 @@ return function (App $app){
     // just to test the db 
     $app->get('/db', function (Request $request, Response $response, $args) {
         $db = $this->get(PDO::class);
-        $sth = $db->prepare("SELECT * from user");
+        $sth = $db->prepare("SELECT * from users");
         $sth->execute();
         $data = $sth->fetchAll(PDO::FETCH_ASSOC);
         $payload = json_encode($data);
