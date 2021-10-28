@@ -1,13 +1,11 @@
 <?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
 use Slim\Routing\RouteCollectorProxy;
+use SubMan\Controller\UserController;
 
 // user group
 $group->group('/user', function (RouteCollectorProxy $group) use ($app) {
-    $group->get('/', function (Request $request, Response $response, $args) {
-        $response->getBody()->write("Hello From User Endpoint");
-        return $response;
-    });
+    $group->post('/', [UserController::class, 'createUser']);
+    $group->get('/{id}', [UserController::class, 'readUser']);
+    $group->put('/{id}', [UserController::class, 'updateUser']);
 });
 
