@@ -2,7 +2,7 @@
 
 class User
 {
-    private $table = "user";
+    private $table = "users";
 
     private $id;
     private $uid;
