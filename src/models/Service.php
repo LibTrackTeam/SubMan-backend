@@ -1,4 +1,5 @@
 <?php
+namespace SubMan\Models;
 
 class Service
 {
