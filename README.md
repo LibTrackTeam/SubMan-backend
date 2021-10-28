@@ -18,3 +18,8 @@ returns "Hello Subman!"
 
 1. set database up in `database.php`
 2. to get $db object anywhere, do $db = this->get("db") to get a PDO object
+
+## Tests
+
+Run `composer test` to run all tests
+Run `composer test:coverage` to generate an html test coverage report in ./build
