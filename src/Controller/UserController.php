@@ -3,7 +3,6 @@ namespace SubMan\Controller;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use SubMan\Exception\ValidationException;
 use SubMan\Repository\UserRepositoryInterface as Repository;
 
 final class UserController{
@@ -76,8 +75,7 @@ final class UserController{
      * 
      * @param array $data
      * 
-     * @throws ValidationException
-     * @return void
+     * @return array
      */
     public function validateNewUserData(array $data,$for="all")
     {

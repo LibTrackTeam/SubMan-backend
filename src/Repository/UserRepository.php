@@ -57,7 +57,7 @@ class UserRepository extends ModelsUser implements UserRepositoryInterface
             if ($this->db->lastInsertId()) {
                 return $this->getUser($this->db->lastInsertId());
             } else {
-                var_dump("error");die();
+                return ['error' => 'unable to create user'];
             }
         } catch (PDOException $e) {
             $this->db->rollback();
