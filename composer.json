@@ -9,6 +9,7 @@
     },
     "scripts": {
         "test": "phpunit --configuration phpunit.xml --do-not-cache-result --colors=always",
-        "test-coverage":"phpunit --configuration phpunit.xml --do-not-cache-result --colors=always --coverage-html"
+        "test-coverage":"phpunit --configuration phpunit.xml --do-not-cache-result --colors=always --coverage-html",
+        "serve": "php -S localhost:3000 -t public public/index.php"
     }
 }
