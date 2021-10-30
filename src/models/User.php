@@ -16,9 +16,9 @@ class User
         // $uid,
         // $currency,
         // $message_token
-        ContainerInterface $containerInterface
+        // ContainerInterface $containerInterface
     ){
-        $this->container = $containerInterface;
+        // $this->container = $containerInterface;
         // $this->id = $id;
         // $this->uid = $uid;
         // $this->currency = $currency;
