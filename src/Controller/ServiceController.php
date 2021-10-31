@@ -3,13 +3,13 @@ namespace SubMan\Controller;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use SubMan\Repository\ServiceRepository;
+use SubMan\Repository\ServiceRepositoryInterface as Repository;
 
 final class ServiceController{
 
     private $serviceRepository;
 
-    public function __construct(ServiceRepository $serviceRepository)
+    public function __construct(Repository $serviceRepository)
     {
         $this->serviceRepository = $serviceRepository;
     }
@@ -22,7 +22,7 @@ final class ServiceController{
         $response->getBody()->write((string)json_encode($result));
         return $response
             ->withHeader('Content-Type', 'application/json')
-            ->withStatus(201);
+            ->withStatus(200);
     }
 
     public function getOneService(Request $request, Response $response)
@@ -35,30 +35,4 @@ final class ServiceController{
             ->withHeader('Content-Type', 'application/json')
             ->withStatus(200);
     }
-
-    // public function updateService(Request $request, Response $response)
-    // {
-    //     // get user id
-    //     $id = (int)$request->getAttribute('id');
-    //     // Get input from the HTTP request
-    //     $data = (array)$request->getParsedBody();
-    //     // make validations
-    //     if ($error = $this->validateNewUserData($data)) {
-    //         $response->getBody()->write(json_encode($error));
-    //         return $response->withStatus(400);
-    //     }
-    //     //update user data
-    //     $result = $this->serviceRepository->updateUser($id, $data);
-    //     if ($result) {
-    //         $response->getBody()->write((string)json_encode(["message" => "update successful"]));
-    //         return $response
-    //             ->withHeader('Content-Type', 'application/json')
-    //             ->withStatus(200);
-    //     } else {
-    //         $response->getBody()->write((string)json_encode(["error" => "unable to update"]));
-    //         return $response
-    //             ->withHeader('Content-Type', 'application/json')
-    //             ->withStatus(400);
-    //     }
-    // }
 }

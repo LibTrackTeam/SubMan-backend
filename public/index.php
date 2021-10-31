@@ -3,8 +3,9 @@
 use SubMan\Repository\UserRepository;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\BodyParsingMiddleware;
-use SubMan\Controller\UserController;
 use Psr\Container\ContainerInterface;
+use SubMan\Repository\ServiceRepository;
+use SubMan\Repository\ServiceRepositoryInterface;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -15,10 +16,9 @@ $database = require __DIR__ . '/../app/database.php';
 // $container->set(PDO::class, $database);
 $container->set('db', $database);
 
-// Bind controllers to the container
-// so we can resolve them in routes.php
-$container->set('UserController', function (ContainerInterface $container) {
-    new UserController(new UserRepository($container));
+
+$container->set(ServiceRepositoryInterface::class, function(ContainerInterface $containerInterface){
+    return new ServiceRepository($containerInterface);
 });
 
 
