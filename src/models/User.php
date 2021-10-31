@@ -1,29 +1,35 @@
 <?php
-
+namespace SubMan\Models;
+use Psr\Container\ContainerInterface;
 class User
 {
-    private $table = "users";
+    protected $table = "users";
 
     private $id;
     private $uid;
     private $currency;
     private $message_token;
+    protected $container;
+    protected $db;
 
     public function __construct(
-        $id,
-        $uid,
-        $currency,
-        $message_token
+        // $id,
+        // $uid,
+        // $currency,
+        // $message_token
+        ContainerInterface $containerInterface
     ){
-        $this->id = $id;
-        $this->uid = $uid;
-        $this->currency = $currency;
-        $this->message_token = $message_token;
+        $this->container = $containerInterface;
+        $this->db = $containerInterface->get(PDO::class);
+        // $this->id = $id;
+        // $this->uid = $uid;
+        // $this->currency = $currency;
+        // $this->message_token = $message_token;
     }
 
     public function get_id() { return $this->id;}
 
-    public function get_uid() { return $$this->uid;}
+    public function get_uid() { return $this->uid;}
 
     public function get_currency() { return $this->currency;}
 
@@ -38,4 +44,3 @@ class User
     public function set_message_token($message_token){ $this->message_token = $message_token; }
         
 }
-

@@ -24,4 +24,4 @@ Backend app for SubMan written in PHP with [Slim](slimframework.com/).
 ### Database Set Up
 
 1. set database up in `database.php`
-2. to get $db object anywhere, do $db = this->get(PDO::class) to get a PDO object
+2. to get $db object anywhere, do $db = $this->get(PDO::class) to get a PDO object
