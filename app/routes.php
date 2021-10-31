@@ -5,6 +5,7 @@ use Slim\App;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Routing\RouteCollectorProxy;
+use SubMan\Graphql\Controller;
 
 return function (App $app){
 
@@ -32,5 +33,12 @@ return function (App $app){
             require $route;
         }
     });
+
+    $app->post('/graphql', function(Request $request, Response $response, $args){
+        // $response->getBody()->write("Hello SubMan Graphql!");
+        // return $response;
+        return Controller::execute($request, $response);
+    });
+    
 
 };
