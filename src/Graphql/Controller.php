@@ -9,50 +9,33 @@ use GraphQL\GraphQL;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
+use GraphQL\Utils\BuildSchema;
 
-class Controller{
+class Controller
+{
 
-    public static function execute(Request $request, Response $response){
+    public static function execute(Request $request, Response $response)
+    {
         $input = $request->getParsedBody();
         $query = $input['query'];
         $variables = $input['variables'] ?? null;
 
-        $queryType = new ObjectType([
-            'name' => 'Query',
-            'fields' => [
-                'echo' => [
-                    'type' => Type::string(),
-                    'args' => [
-                        'message' => Type::nonNull(Type::string()),
-                    ],
-                    'resolve' => function ($rootValue, $args) {
-                        return $rootValue['prefix'] . $args['message'];
-                    }
-                ],
-            ],
-        ]);
+        // get schema
+        $schema = BuildSchema::build(SDL::get());
 
-        $schema = new Schema(['query' => $queryType]);
+        // get resolvers
+        $root = [
+            'category' => Resolver::category(),
+            'service' => Resolver::service(),
+            'subscription' => Resolver::subscription(),
+            'user' => Resolver::user(),
+        ];
 
-        try {
-            $rootValue = ['prefix' => 'You said: '];
-            $result = GraphQL::executeQuery($schema, $query, $rootValue, null, $variables);
-            $output = $result->toArray();
-        } catch (Exception $exception) {
-            $output = [
-                'error' => [
-                    [
-                        'message' => $exception->getMessage()
-                    ]
-                ]
-            ];
-        }
-
-        $response = $response->withHeader('Content-Type', 'application/json');
+        $output = GraphQL::executeQuery($schema, $query, $root, null, $variables);
         $response->getBody()->write(json_encode($output));
 
-        return $response;
-
-    
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus(200);
     }
 }
