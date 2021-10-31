@@ -5,8 +5,6 @@ use Psr\Container\ContainerInterface;
 
 class Service
 {
-    public $table = "services";
-
     private $id;
     private $name;
     private $icon;
