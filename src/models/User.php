@@ -20,7 +20,7 @@ class User
         ContainerInterface $containerInterface
     ){
         $this->container = $containerInterface;
-        $this->db = $containerInterface->get('db');
+        $this->db = $containerInterface->get(PDO::class);
         // $this->id = $id;
         // $this->uid = $uid;
         // $this->currency = $currency;

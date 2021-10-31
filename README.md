@@ -17,4 +17,4 @@ returns "Hello Subman!"
 ### Database Set Up
 
 1. set database up in `database.php`
-2. to get $db object anywhere, do $db = this->get("db") to get a PDO object
+2. to get $db object anywhere, do $db = $this->get(PDO::class) to get a PDO object
