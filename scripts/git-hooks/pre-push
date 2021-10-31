@@ -2,6 +2,13 @@
 
 echo "Running pre-push hook"
 
+echo "validate composer:"
+composer validate
+if [ $? -ne 0 ]; then
+ echo "Composer must be valid before push!"
+ exit 1
+fi
+
 echo "run code analysis:"
 composer lint
 if [ $? -ne 0 ]; then
