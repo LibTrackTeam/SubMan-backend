@@ -2,6 +2,8 @@
 
 class Subscription
 {
+    public $table = "subscriptions";
+
     private $id;
     private $service_id;
     private $cost;

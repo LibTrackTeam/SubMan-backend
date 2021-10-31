@@ -44,4 +44,3 @@ class User
     public function set_message_token($message_token){ $this->message_token = $message_token; }
         
 }
-

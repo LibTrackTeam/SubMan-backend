@@ -2,6 +2,8 @@
 
 class Category
 {
+    public $table = "categories";
+
     private $id;
     private $name;
     private $icon;
