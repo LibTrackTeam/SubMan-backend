@@ -2,7 +2,6 @@
 namespace SubMan\Repository;
 
 use PDOException;
-use Psr\Container\ContainerInterface;
 use SubMan\Models\User as ModelsUser;
 
 interface UserRepositoryInterface
@@ -36,12 +35,6 @@ interface UserRepositoryInterface
 
 class UserRepository extends ModelsUser implements UserRepositoryInterface
 {
-    private $db;
-
-    public function __contruct()
-    {
-        $this->db = $this->container->get('db');
-    }
 
     /**
      * Create a new user

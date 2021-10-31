@@ -10,15 +10,17 @@ class User
     private $currency;
     private $message_token;
     protected $container;
+    protected $db;
 
     public function __construct(
         // $id,
         // $uid,
         // $currency,
         // $message_token
-        // ContainerInterface $containerInterface
+        ContainerInterface $containerInterface
     ){
-        // $this->container = $containerInterface;
+        $this->container = $containerInterface;
+        $this->db = $containerInterface->get('db');
         // $this->id = $id;
         // $this->uid = $uid;
         // $this->currency = $currency;
