@@ -10,6 +10,7 @@ class User
     private $currency;
     private $message_token;
     protected $container;
+    protected $db;
 
     public function __construct(
         // $id,
@@ -19,6 +20,7 @@ class User
         ContainerInterface $containerInterface
     ){
         $this->container = $containerInterface;
+        $this->db = $containerInterface->get(PDO::class);
         // $this->id = $id;
         // $this->uid = $uid;
         // $this->currency = $currency;
@@ -42,4 +44,3 @@ class User
     public function set_message_token($message_token){ $this->message_token = $message_token; }
         
 }
-

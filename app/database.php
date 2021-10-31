@@ -1,11 +1,7 @@
 <?php
 
 return function(){
-    // $host = "";
-    // $dbname = "";
     $charset = "utf8mb4";
-    // $username = "";
-    // $password = "";
 
     // parse .properties file
     if (!$settings = parse_ini_file('db.properties', TRUE)) throw new exception('Unable to open db.properties');

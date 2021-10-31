@@ -1,27 +1,48 @@
 <?php
 namespace SubMan\Repository;
 
-use Psr\Container\ContainerInterface;
+use PDOException;
 use SubMan\Models\User as ModelsUser;
 
-class UserRepository extends ModelsUser
+interface UserRepositoryInterface
+{    
+    /**
+     * Create a new user
+     * 
+     * @param array $data
+     */
+    public function createUser($data);
+
+    /**
+     * Read one user
+     * 
+     * @param string $id
+     * @return object
+     */
+    public function getUser($id);
+
+
+    /**
+     * Update an existing user's records
+     * 
+     * @param string $id
+     * @param array $data
+     * @return object
+     */
+    public function updateUser($id,$data);
+    
+}
+
+class UserRepository extends ModelsUser implements UserRepositoryInterface
 {
-    private $db;
-    public function __contruct(ContainerInterface $containerInterface)
-    {
-        parent::__construct($containerInterface);
-    }
 
     /**
      * Create a new user
      * 
-     * @param string $uid
-     * @param string $currency
-     * @param string $message_token
+     * @param array $data
      */
     public function createUser($data)
     {
-        $this->db = $this->container->get('db');
         $sql = "INSERT INTO $this->table SET `uid` = ?, `currency` = ?, `message_token` = ?";
         $statement = $this->db->prepare($sql);
         try {
@@ -29,23 +50,22 @@ class UserRepository extends ModelsUser
             if ($this->db->lastInsertId()) {
                 return $this->getUser($this->db->lastInsertId());
             } else {
-                var_dump("error");die();
+                return ['error' => 'unable to create user'];
             }
-        } catch (PDOExecption $e) {
+        } catch (PDOException $e) {
             $this->db->rollback();
             return $e->getMessage();
         }
     }
 
     /**
-     * Read user
+     * Read one user
      * 
-     * @param string $uid
+     * @param string $id
      * @return object
      */
     public function getUser($id)
     {
-        $this->db = $this->container->get('db');
         $sql = "SELECT * FROM $this->table WHERE id = :id";
         $statement = $this->db->prepare($sql);
         $statement->execute(array(':id' => $id));
@@ -59,13 +79,11 @@ class UserRepository extends ModelsUser
      * Update an existing user's records
      * 
      * @param string $id
-     * @param string $uid
-     * @param string $currency
-     * @param string $message_token
+     * @param array $data
+     * @return object
      */
     public function updateUser($id,$data)
     {
-        $this->db = $this->container->get('db');
         $sql = "UPDATE $this->table SET `currency` = ?, `message_token` = ? WHERE `id` = ?";
         $statement = $this->db->prepare($sql);
         $result = $statement->execute(array($data['currency'],$data['message_token'],$id));
