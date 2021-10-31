@@ -1,5 +1,6 @@
 {
-    
+    "name": "libtrack/subman-backend",
+    "description": "Backend app written in Php with Slim Framework for libtrack/subman ",
     "require": {
         "slim/slim": "^4.9",
         "slim/psr7": "^1.5",
