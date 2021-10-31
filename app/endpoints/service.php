@@ -1,13 +1,13 @@
 <?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
 use Slim\Routing\RouteCollectorProxy;
+use SubMan\Controller\ServiceController;
 
 // service group
 $group->group('/service', function (RouteCollectorProxy $group) use ($app) {
-
-    $group->get('/', function (Request $request, Response $response, $args) {
-        $response->getBody()->write("Hello From Service Endpoint");
-        return $response;
-    });
+    $group->get('', [ServiceController::class, 'getAllServices']);
+    $group->get('/{id}', [ServiceController::class, 'getOneService']);
+    // For Admin
+    // $group->post('', [ServiceController::class, 'createService']);
+    // $group->put('/{id}', [ServiceController::class, 'updateService']);
+    // $group->delete('/{id}', [ServiceController::class, 'deleteService']);
 });

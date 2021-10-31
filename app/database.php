@@ -15,5 +15,9 @@ return function(){
     $username = $settings['database']['username'];
     $password = $settings['database']['password'];
 
-    return new PDO($dns,$username, $password);
+    // $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+    $connection = new PDO($dns,$username, $password);
+    $connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $connection->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, false);
+    return $connection;
 };
